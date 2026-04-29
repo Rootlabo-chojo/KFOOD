@@ -31,7 +31,7 @@
   * [📖 영수증 관리 및 제출](culture/employeeguide/receiptemployee.md)
   * [📖 네이버 쇼핑 사용 방법](culture/employeeguide/navershoppingemployee.md)
   * [📖 현금영수증 발행 방법](culture/employeeguide/cashreceiptemployee.md)
-  * [📖 Copy of 현금영수증 발행 방법](culture/employeeguide/cashreceiptemployee-1.md)
+  * [📖 반려견 동반 매장 이용 가이드](culture/employeeguide/petguide.md)
   * [📖 슬랙 워크플로 이용 방법](culture/employeeguide/slackworkflowemployee.md)
   * [📖 슬랙 허들 이용 방법](culture/employeeguide/slackhuddleemployee.md)
   * [📖 슬랙(Slack) 검색 기능 활용법](culture/employeeguide/slacksearchemployee.md)
