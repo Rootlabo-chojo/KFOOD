@@ -1,8 +1,11 @@
 # Table of contents
 
+* [👋 Solution for Every Bite](README.md)
+* [⁉️ 자주 묻는 질문](faq.md)
+
 ## Culture & Guides <a href="#culture" id="culture"></a>
 
-* [🫂 직급 체계](README.md)
+* [🫂 직급 체계](culture/careerlevels.md)
 * [☕ 커피챗 요청](culture/coffeechat.md)
 * [👨‍🍳 지점장 혜택](culture/branchbenefits.md)
 * [📖 창업 컨설팅 패키지](culture/startupconsulting.md)
@@ -31,9 +34,9 @@
   * [📖 영수증 관리 및 제출](culture/employeeguide/receiptemployee.md)
   * [📖 네이버 쇼핑 사용 방법](culture/employeeguide/navershoppingemployee.md)
   * [📖 현금영수증 발행 방법](culture/employeeguide/cashreceiptemployee.md)
-  * [📖 반려견 동반 매장 이용 가이드](culture/employeeguide/petguide.md)
   * [📖 슬랙 워크플로 이용 방법](culture/employeeguide/slackworkflowemployee.md)
   * [📖 슬랙 허들 이용 방법](culture/employeeguide/slackhuddleemployee.md)
+  * [📖 반려견 동반 매장 이용 가이드](culture/employeeguide/petguide.md)
   * [📖 슬랙(Slack) 검색 기능 활용법](culture/employeeguide/slacksearchemployee.md)
   * [📖 주간 휴일 및 연차 신청 가이드](culture/employeeguide/leaverequest.md)
 * [📖 본사 가이드](culture/hqguide/README.md)
@@ -92,6 +95,32 @@
 * [📖 피그마 가이드](culture/figmaguide/README.md)
   * [📖 기본 원칙 및 구조 관리](culture/figmaguide/designprinciples.md)
 
+## Employee Welfare
+
+* [📆 연차 제도](employee-welfare/annualleave.md)
+* [🫂 인재 추천 제도](employee-welfare/referralprogram.md)
+* [👯 회식 지원](employee-welfare/teamdining.md)
+* [🌴 휴가비 지원](employee-welfare/vacationsupport.md)
+* [👨‍👩‍👦 경조사 지원](employee-welfare/eventsupport.md)
+* [🏡 주거비 지원](employee-welfare/housing.md)
+* [👶 영유아 지원](employee-welfare/housingsupport.md)
+* [💳 법인 카드 지원](employee-welfare/corporatecard.md)
+* [🎁 명절 선물 지원](employee-welfare/holidaygift.md)
+* [🏦 퇴직 연금 제도](employee-welfare/retirementpension.md)
+
+## External Resources <a href="#link" id="link"></a>
+
 ***
 
-* [KFOOD](<README (1).md>)
+* [🌐 공식 웹사이트](https://kfoodinc.co.kr)
+* [🛍️ 공식 스토어(준비중)](https://kfoodinc.co.kr)
+* [🔐 암호 저장소(1password)](https://kfood.1password.com/app)
+* [💽 시놀로지 저장소](https://rootlabo.quickconnect.to/)
+* [📖 시놀로지 저장소(내부망)](https://finds.synology.com/)
+* [📧 사내 이메일 관리](https://mail.worksmobile.com/)
+* [📆 사내 행사 일정](https://calendar.google.com/calendar/embed?src=ee1f0d25ab1f04a724b3bb6951830a39f3251da1c08b821d40ba91b43be092cb%40group.calendar.google.com\&ctz=Asia%2FSeoul)
+* [📆 임직원 근무 일정](https://calendar.google.com/calendar/embed?src=f523ee7c376c1fc44569ada5de3c28fa0e0c89e05f0fb6ec5890fe5811a4598c%40group.calendar.google.com\&ctz=Asia%2FSeoul)
+* [📆 임직원 생일 일정](https://calendar.google.com/calendar/embed?src=bac30be5fb4ca1e250369b8508c3ff0415832c42e4003c81ad1633e49ee0f41e%40group.calendar.google.com\&ctz=Asia%2FSeoul)
+* [🧑‍🤝‍🧑 사내 임직원 등록](https://v3n4mwznbhr.typeform.com/to/sbYzLbeV)
+* [🧑‍🤝‍🧑 사내 파트타임 직원 등록](https://v3n4mwznbhr.typeform.com/to/mLNzx3zy)
+* [📃 파트타임 근무 시간 등록](https://docs.google.com/spreadsheets/d/13K1zsbd-cPuOmRVpSPZlWHuwv_CWgsYPFyGaVPobNF4/)

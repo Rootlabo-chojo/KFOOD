@@ -17,7 +17,7 @@ description: >-
 
 **숙성 방식**
 
-<div align="center" data-full-width="false"><figure><img src="/broken/files/El69jZESUyvoHMAD7J5f" alt=""><figcaption></figcaption></figure></div>
+<div align="center" data-full-width="false"><figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure></div>
 
 * 오크통: 나무향/타닌/아로마(바닐라, 계피, 견과류 등) 추가
 * 스테인리스 통: 균일한 맛과 향, 포도 본연의 맛 유지
@@ -47,7 +47,7 @@ description: >-
 * **Aroma (아로마)**: 포도 자체의 향기
   *
 
-      <figure><img src="/broken/files/cmfDJ14f3K6Xb3o7dmVq" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 * **Fruity (프루티)**: 신선한 과실 향
 * **Floral (플로럴)**: 꽃 향
 * **Herbaceous (허베이셔스)**: 풀, 허브 향
@@ -55,7 +55,7 @@ description: >-
 * **Bouquet (부케)**: 숙성 과정에서 생성되는 복합적 향
   *
 
-      <figure><img src="/broken/files/6xT1HuRR0lrjeYOgz6JI" alt=""><figcaption></figcaption></figure>
+      <figure><img src="../../.gitbook/assets/다운로드 (4).png" alt=""><figcaption></figcaption></figure>
 * **Nutty (너티)**: 견과류 향
 * **Spicy (스파이시)**: 향신료 향
 * **Woody/Oaky (우디/오키)**: 오크통 숙성 향
@@ -166,13 +166,13 @@ description: >-
 * 잔의 1/3 정도만 따르기 → 공기 접촉·색 확인 용이
 * 잔 기울여 색·투명도 관찰 → 숙성도/품종/바디감 파악
 
-<figure><img src="/broken/files/BnSt1vA5diFTQQ6q4k5w" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/20151020080647044374E01.jpg" alt=""><figcaption></figcaption></figure>
 
 * Wine legs로 알코올 농도 가늠
 * 잔 가까이에서 향 맡기 → 품질·품종 특징 확인
 * 스월링으로 향 발현 (단, 섬세한 와인은 자제)
 
-<figure><img src="/broken/files/UBvFtEFDGCkkfYdfTgIV" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
 
 * 테이스팅 노트 작성 (색–향–맛–여운 순)
 

@@ -28,7 +28,7 @@ description: >-
 
     * 지점명 / 마스킹 번호를 확인하고 선택
 
-    <figure><img src="/broken/files/qtAA1hbux5UKXkbBQFz2" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../../.gitbook/assets/업장별 카드 결제.png" alt=""><figcaption></figcaption></figure>
 5. **할부, 포인트 설정**
    * 할부는 허용 하지  않습니다.(회계 지침)
    * 포인트 사용 금지 (정산 혼선 방지)

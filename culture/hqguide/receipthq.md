@@ -18,7 +18,7 @@ description: >-
 * Adobe Scan 앱 설치 후 실행
 * 초기 화면에서 **사진첩 아이콘 클릭** 후 사진첩으로 이동
 
-<div data-full-width="false"><figure><img src="/broken/files/PgMseasTpfdivEShO3U5" alt=""><figcaption></figcaption></figure></div>
+<div data-full-width="false"><figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure></div>
 
 ***
 
@@ -27,7 +27,7 @@ description: >-
 * 한 달 동안 모은 **법인카드 영수증 전체 선택**
 * 우측 상단 **체크 버튼 클릭 → 다음 단계 이동**
 
-<figure><img src="/broken/files/VRBxCQjfL3VjTgOhCh32" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -37,7 +37,7 @@ description: >-
 * 파일명을 **\[이름 + 월]** 형식으로 수정 (예: `신주혁 9월 법인카드 영수증`)
 * **PDF 저장**
 
-<figure><img src="/broken/files/oSHZVy17nkt93WoIf4rr" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -46,7 +46,7 @@ description: >-
 * 이름 변경 누락 시 → **…자세히 → 이름 변경** 메뉴로 추후 수정 가능
 * 파일명에는 반드시 **이름, 날짜 기재**
 
-<figure><img src="/broken/files/6JVTfQXKNZpNYpim6haF" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -54,7 +54,7 @@ description: >-
 
 * **공유 버튼 → 사본 공유** 선택
 
-<figure><img src="/broken/files/QS53yuSVwvVExtcyPYDZ" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
 ***
 

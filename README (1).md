@@ -1,2 +1,0 @@
-# KFOOD
-KFOOD Manual
