@@ -23,6 +23,7 @@
   * [📖 영수증 관리 및 제출](culture/universalmanual/receiptmanagement.md)
   * [📖 매장 휴무 안내 기본 매뉴얼](culture/universalmanual/holiday.md)
   * [📖 온라인 셀러 및 배달앱 상품 관리](culture/universalmanual/onlinesellermanagement.md)
+  * [📖 매장 사진 촬영 및 AI 보정 매뉴얼](culture/universalmanual/playground.md)
 * [📖 업장별 메뉴얼](culture/storemanuals/README.md)
   * [📖 쇼텐](culture/storemanuals/syoten.md)
   * [📖 스시주연](culture/storemanuals/sushijooyeon.md)
