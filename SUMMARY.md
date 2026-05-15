@@ -118,6 +118,7 @@
 * [🛍️ 공식 스토어(준비중)](https://kfoodinc.co.kr)
 * [📃 토스플레이스 사용자 가이드](https://tossplace.gitbook.io/)
 * [📃 토스플레이스 디바이스 가이드](https://support-tossplace.oopy.io/)
+* [🧻 토스플레이스 영수증 용지 신청](https://partners.ishopcare.co.kr/paper?incoming_type=homepage)
 * [🖼️ AI 이미지 변환 사내 서비스](https://api.lifelens.co.kr/playground)
 * [🔐 암호 저장소(1password)](https://kfood.1password.com/app)
 * [💽 시놀로지 저장소](https://rootlabo.quickconnect.to/)
