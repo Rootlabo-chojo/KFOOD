@@ -85,6 +85,8 @@
   * [📖 인터넷 설치](culture/startupguide/internetsetup.md)
 * [📖 배달 가이드](culture/delivery/README.md)
   * [📖 배달 메뉴 품절 대응 매뉴얼](culture/delivery/cancellation.md)
+  * [📖 배달/포스기 PC 스펙 및 구매 가이드](culture/delivery/pcmanual.md)
+  * [📖 배달 용기 및 포장 장비 발주 매뉴얼](culture/delivery/pcmanual-1.md)
 * [📖 아사나 가이드](culture/asanaguide/README.md)
   * [📖 아사나(Asana) 기본 원칙](culture/asanaguide/asanaprinciples.md)
   * [📖 테스크(Task) 생성 규칙](culture/asanaguide/taskcreation.md)
@@ -114,6 +116,8 @@
 
 * [🌐 공식 웹사이트](https://kfoodinc.co.kr)
 * [🛍️ 공식 스토어(준비중)](https://kfoodinc.co.kr)
+* [📃 토스 플레이스 가이드](https://buly.kr/1n5pKJ2)
+* [🖼️ AI 이미지 변환 사내 서비스](https://api.lifelens.co.kr/playground)
 * [🔐 암호 저장소(1password)](https://kfood.1password.com/app)
 * [💽 시놀로지 저장소](https://rootlabo.quickconnect.to/)
 * [📖 시놀로지 저장소(내부망)](https://finds.synology.com/)
