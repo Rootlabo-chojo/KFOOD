@@ -110,6 +110,11 @@
 * [💳 법인 카드 지원](employee-welfare/corporatecard.md)
 * [🎁 명절 선물 지원](employee-welfare/holidaygift.md)
 * [🏦 퇴직 연금 제도](employee-welfare/retirementpension.md)
+* [💯 퍼펙트 출근 어워드](employee-welfare/perfect-attendance.md)
+* [⭐ 히트 메뉴 어워드](employee-welfare/hit-menu.md)
+* [🎞️ 콘텐츠 어워드](employee-welfare/content.md)
+* [🍾 소믈리에 어워드](employee-welfare/sommelier.md)
+* [🏆 매출 신기록 어워드](employee-welfare/sales-record.md)
 
 ## External Resources <a href="#link" id="link"></a>
 
