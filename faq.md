@@ -1,5 +1,23 @@
 ---
 description: 회사 생활 중 궁금한 점이 있다면 여기서 해결해 보세요!
+layout:
+  width: default
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: false
+  metadata:
+    visible: true
+  tags:
+    visible: true
+  actions:
+    visible: true
 ---
 
 # ⁉️ 자주 묻는 질문
@@ -18,6 +36,7 @@ description: 회사 생활 중 궁금한 점이 있다면 여기서 해결해 �
 
 **연차 수당 지급 시기**
 
+* **26년도 부터는 연차 촉진제도로 인해 연차 수당 지급 없습니다.**
 * 퇴사 시 정산 지급
 * 매년 하반기에 연간 정산하여 지급 (연 1회 정산)
 
@@ -332,6 +351,14 @@ description: 회사 생활 중 궁금한 점이 있다면 여기서 해결해 �
 <summary><strong>왜 CCTV는 즉시 보여주면 안 되나요?</strong></summary>
 
 CCTV 영상에는 요청한 고객 외에, 다른 수많은 고객과 저희 직원의 얼굴 등 민감한 개인정보가 포함되어 있습니다. 당사자의 동의 없이 이를 노출할 경우, 개인정보보호법 위반으로 심각한 법적 문제로 이어질 수 있기 때문입니다.
+
+</details>
+
+<details>
+
+<summary><strong>주거비 지원은 수습 기간에도 가능한가요?</strong></summary>
+
+주거비 지원은 수습 기간 이후 정규 사원 대상으로 가능합니다.
 
 </details>
 
