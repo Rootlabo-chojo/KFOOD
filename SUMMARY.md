@@ -47,6 +47,7 @@
   * [📖 본사 업무 지원 시 메뉴얼](culture/hqguide/hqsupportmanual.md)
 * [📖 관리자 가이드](culture/managerguide/README.md)
   * [📖 매출 CPR 실행](culture/managerguide/cpr.md)
+  * [📖 인사 처리 매뉴얼](culture/managerguide/hrlifecycle.md)
   * [📖 당직 제도 운영](culture/managerguide/dutysystemmanager.md)
   * [📖 사원 퇴사 시 가이드](culture/managerguide/resignationguide.md)
   * [📖 비품 관리 방법](culture/managerguide/inventorymanagement.md)
