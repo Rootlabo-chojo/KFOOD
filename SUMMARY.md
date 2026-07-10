@@ -64,6 +64,7 @@
   * [📖 슬랙 워크플로 이용 방법](culture/managerguide/slackworkflowmanager.md)
   * [📖 슬랙(Slack) 검색 기능 활용법](culture/managerguide/slacksearchmanager.md)
   * [📖 CCTV 열람 요청 대응 방법](culture/managerguide/cctv.md)
+  * [📖 카드결제 수동 취소 매뉴얼 (중복결제 · 포스 취소 불가 시)](culture/managerguide/cancelthepayment.md)
   * [📖 신규 입사자 온보딩 방법(soon)](culture/managerguide/soon.md)
   * [📖 일정산 및 월정산 방법(soon)](culture/managerguide/soon-1.md)
   * [📖 아르바이트 시트 기재 방법(soon)](culture/managerguide/soon-2.md)
