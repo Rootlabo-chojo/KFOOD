@@ -687,3 +687,10 @@ td.cell:hover .cell-empty { color: var(--grey-400); }
 .popover .p-item small { margin-top: 2px; }
 .logo-pick { object-fit: cover; box-shadow: 0 0 0 1px var(--line); }
 .lg-s { flex: none; }
+.ai-pop { padding: 6px; }
+.ai-pop-h { display: flex; gap: 10px; align-items: center; }
+.ai-pop-h img { width: 48px; height: auto; }
+.ai-pop-h b { display: block; font-size: 15px; color: var(--text-strong); }
+.ai-pop-h small { font-size: 12px; color: var(--text-sub); white-space: normal; }
+.ai-pop-qr { width: 150px; height: 150px; margin: 12px auto; padding: 8px; border-radius: 14px; box-shadow: 0 0 0 1px var(--line) inset; background: #fff; }
+.ai-pop-st { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }

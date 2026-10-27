@@ -400,5 +400,21 @@
     }, { width: 200, align: 'right' });
   };
 
+  /* 직원 앱 설치 안내 (PC 대시보드) */
+  acts.appInstall = (b) => popover(b, `<div class="ai-pop"><div class="ai-pop-h"><img src="../assets/brand/character.png" alt=""><span><b>직원 앱 설치</b><small>휴대폰 카메라로 QR을 찍으면 설치 화면이 열려요</small></span></div>
+      <div class="ai-pop-qr">${fakeQR(31, 25)}</div>
+      <div class="ai-pop-st"><button class="btn btn-grey btn-sm" data-st="App Store">${ic('mono/smartphone')}App Store</button><button class="btn btn-grey btn-sm" data-st="Google Play">${ic('mono/play')}Google Play</button></div>
+      <hr><button class="p-item" data-k="send">${ic('mono/chat')}직원에게 설치 안내 보내기<span class="end">설치 전 9명</span></button><a class="p-item" href="../app/">${ic('mono/open-external')}웹으로 직원 앱 열기</a></div>`, (el) => {
+    el.querySelectorAll('[data-st]').forEach((x) => (x.onclick = () => toast(`${x.dataset.st} 링크를 복사했어요`)));
+    el.querySelector('[data-k="send"]').onclick = () => {
+      closePopover();
+      const m = openModal({ title: '설치 안내 보내기', body: `<p class="card-desc" style="margin:0">아직 앱을 설치하지 않은 구성원에게 문자로 설치 링크를 보내요.</p>
+        <div class="checklist">${['정민재', '오세린', '서다은', '강하린'].map((n) => `<label><span class="avatar">${n.slice(-2)}</span><span class="txt"><b>${n}</b><small>앱 미설치 · 웹으로만 접속</small></span><input type="checkbox" class="cb" checked></label>`).join('')}</div>
+        <div class="box"><b style="font-size:14px">[워크칩] SOLV에서 출퇴근 앱 설치를 부탁드려요.</b><p style="margin:4px 0 0;font-size:13px;color:var(--text-sub)">app.workchip.co.kr/install · 설치 후 회사 계정으로 로그인하세요</p></div>`,
+        footer: '<button class="btn btn-grey btn-lg" data-close>취소</button><button class="btn btn-primary btn-lg" id="ok">보내기</button>' });
+      m.$('#ok').onclick = () => { m.close(); toast(`${m.el.querySelectorAll('.cb:checked').length}명에게 설치 안내를 보냈어요`); };
+    };
+  }, { width: 300, align: 'right' });
+
   A.start();
 })();

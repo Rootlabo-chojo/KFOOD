@@ -271,7 +271,7 @@
           <button class="icon-btn burger" data-act="side" aria-label="메뉴 열기">${ic('glyph/menu')}</button>
           <button class="search" data-act="cmd">${ic('glyph/search')}<span>메뉴 찾기 · 무엇을 하고 싶으세요?</span><kbd>⌘K</kbd></button>
           <div class="spacer"></div>
-          <a class="btn btn-ghost btn-sm top-app" href="../app/">${ic('mono/smartphone')}<span>직원 앱</span></a>
+          <button class="btn btn-ghost btn-sm top-app" data-act="appInstall">${ic('mono/smartphone')}<span>직원 앱</span></button>
           <button class="icon-btn bell" aria-label="알림" data-act="notif">${ic('mono/bell')}<i class="dot"></i></button>
           <div class="me">
             <button id="meBtn" data-act="me"><span class="avatar">하늘</span><b>김하늘</b>${ic('glyph/chevron-down')}</button>

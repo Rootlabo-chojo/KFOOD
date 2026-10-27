@@ -488,6 +488,7 @@
     if (r === 'intro' || r === 'login') {
       if (authed) { location.hash = '#/home'; return; }
       document.body.dataset.screen = r;
+      setTimeout(() => window.dispatchEvent(new CustomEvent('routed', { detail: r })));
       if (r === 'login') { app.innerHTML = login(); document.title = '로그인 · 워크칩'; return bindLogin(); }
       app.innerHTML = intro(); document.title = '워크칩'; return;
     }
@@ -501,6 +502,7 @@
     bindControls(app);
     document.title = `${([...TABS, ...MTABS].find((t) => t[0] === r) || [, '알림'])[1]} · 워크칩`;
     if (MP[r]) window.MGR.after?.[r]?.(app);
+    window.dispatchEvent(new CustomEvent('routed', { detail: r }));
     window.scrollTo(0, 0);
     $('#seg')?.addEventListener('change', (e) => { S.team = e.detail === 'team'; route(); });
     $('#af')?.addEventListener('change', (e) => { S.attFilter = e.detail; route(); });

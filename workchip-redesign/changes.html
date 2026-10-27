@@ -391,6 +391,22 @@ function v3() {
 
 
 
+
+function v9() {
+  const sh = (f, c) => fig(A + f + '.jpg', c, 'mob');
+  return `<section class="page">
+    <div class="eyebrow">X6 · v9 앱 설치 유도</div><h1>기기마다 다른 앱 설치 안내 (모바일 웹 · PC)</h1>
+    <div class="mthumbs v-grid" style="grid-template-columns:repeat(5,1fr) 2.2fr">${sh('v9-ios', 'iPhone · 앱으로 안내')}${sh('v9-android', 'Android · 아래 띠')}${sh('v9-android-home', 'Android · 로그인 후 시트')}${sh('v9-inapp', '카카오톡 안 · 브라우저로')}${sh('v9-inapp-sheet', '브라우저로 여는 법')}
+      <div>${fig(A + 'v9-pc.jpg', 'PC에서 직원 앱 · 휴대폰으로 옮기기', 'desk')}<div style="height:3mm"></div>${fig(A + 'v9-admin.jpg', '대시보드 · 직원 앱 설치', 'desk')}</div></div>
+    <table class="tbl" style="margin-top:3mm;font-size:8.6pt"><tr><th>접속</th><th>지금 배포본 (확인)</th><th>시안</th></tr>
+      <tr><td>iPhone Safari</td><td>로그인 전 전체 화면 "Workchip은 앱에서 사용해요" · App Store에서 받기 · 이미 설치했다면 앱 열기</td><td>같은 흐름을 캐릭터 화면으로 + 앱에서만 되는 3가지(알림 · QR 출근 · 내 기기) 안내</td></tr>
+      <tr><td>Android Chrome</td><td>홈 화면에 추가(PWA) 안내</td><td>로그인 전엔 아래 띠 "앱으로 설치하면 더 편해요 [설치]", 로그인 후 홈에서 한 번 설치 시트 · 설치 뒤 "홈 화면의 워크칩을 열어 주세요"</td></tr>
+      <tr><td>카카오톡 · 네이버 등 앱 안</td><td>iPhone은 위 화면, 앱 안에서는 설치 불가 안내</td><td>위쪽 주황 띠 "카카오톡 안에서는 설치할 수 없어요 [브라우저로 열기]" → 여는 법 3단계 + 주소 복사</td></tr>
+      <tr><td>PC 브라우저</td><td>안내 없음</td><td>직원 앱 옆에 QR(휴대폰 카메라로 설치) · 설치 링크 문자 · App Store / Google Play. 대시보드 상단 "직원 앱"에 QR · 스토어 · <b>직원에게 설치 안내 보내기</b>(미설치자에게 문자)</td></tr></table>
+    <div class="note">시안 확인용: 로그인 전 화면 오른쪽 위 "시안 · 기기" 버튼(또는 주소 ?dev=ios · android · inapp · pc)으로 기기를 바꿔 볼 수 있어요. 실서비스에서는 접속 기기를 자동으로 판별해요.</div>
+    ${foot('v9 앱 설치 유도')}</section>`;
+}
+
 function v8() {
   const sh = (f, c) => fig(A + f + '.jpg', c, 'mob');
   return `<section class="page">
@@ -502,7 +518,7 @@ function summary() {
         <li><b>문장은 짧고 해요체</b> — "휴가 등록하기" → "휴가 등록", 반복 문구 제거</li>
         <li><b>라이트 모드 기본</b> · 브랜드 표기 "워크칩" · 로고는 심볼 + workchip</li>
       </ol></div>
-      <div><h2>화면 목록</h2><ul class="toc"><li><span>X</span><b>v4 – v8 피드백 반영 (X1 – X5)</b></li><li><span>W</span><b>v3 피드백 반영 (W1–W7)</b></li><li><span>V</span><b>v2 피드백 반영 (V1–V9)</b></li>${toc}<li><span>C</span>브랜드 표기 · 디자인 토큰</li><li><span>D</span>개발 반영 체크리스트</li></ul></div>
+      <div><h2>화면 목록</h2><ul class="toc"><li><span>X</span><b>v4 – v9 피드백 반영 (X1 – X6)</b></li><li><span>W</span><b>v3 피드백 반영 (W1–W7)</b></li><li><span>V</span><b>v2 피드백 반영 (V1–V9)</b></li>${toc}<li><span>C</span>브랜드 표기 · 디자인 토큰</li><li><span>D</span>개발 반영 체크리스트</li></ul></div>
     </div>
     ${foot('요약')}
   </section>`;
@@ -590,7 +606,7 @@ function checklist() {
   </section>`;
 }
 
-document.getElementById('doc').innerHTML = cover() + summary() + v8() + v7() + v6() + v5() + v4() + v3() + v2() + brand() + SCREENS.map(screen).join('') + extra() + checklist();
+document.getElementById('doc').innerHTML = cover() + summary() + v9() + v8() + v7() + v6() + v5() + v4() + v3() + v2() + brand() + SCREENS.map(screen).join('') + extra() + checklist();
 </script>
 </body>
 </html>
