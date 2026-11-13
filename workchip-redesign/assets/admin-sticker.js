@@ -19,22 +19,22 @@
   const markLogo = (logo, size) => logo
     ? `<img class="stk-logo-img" src="${logo}" alt="매장 로고">`
     : `<span class="stk-wc"><img src="../assets/brand/symbol.png" alt="">workchip</span>`;
+  /* 가이드 템플릿(build.py std) 값 그대로 — 1240 × 1844px 기준, --u = 스티커 폭/1240 */
   function sticker(o) {
-    const nfc = o.ver === 'nfc', mini = o.size === 'mini', qr = fakeQR(o.seed || 7, 29);
-    const title = nfc ? ['폰 대면', '출근 끝'] : ['QR 찍으면', '출근 끝'];
-    const sub = mini ? (nfc ? '대는 순간 <b>출근·퇴근</b> 기록' : '찍는 순간 <b>출근·퇴근</b> 기록')
-      : (nfc ? '휴대폰을 대면 <b>바로 출근·퇴근</b>이 기록돼요' : '카메라로 찍으면 <b>바로 출근·퇴근</b>이 기록돼요');
-    const nfcDot = `<div class="stk-nfc">${ic('mono/smartphone')}<b>여기에 폰 대기</b><small>NFC</small></div>`;
-    return `<div class="stk ${mini ? 'mini' : 'std'} ${nfc ? 'nfc' : ''} ${o.guide ? 'guide' : ''}"><div class="stk-in">
-      <div class="stk-top"><span class="stk-logo ${o.guide ? 'ga' : ''}">${markLogo(o.logo, o.size)}</span>${mini ? '' : `<em class="stk-badge">${nfc ? '출퇴근 NFC · QR' : '출퇴근 QR'}</em>`}</div>
-      <div class="stk-head"><h3>${title[0]}<br><span>${title[1]}</span></h3>${mini ? '' : '<img class="stk-char" src="../assets/brand/character.png" alt="">'}</div>
-      <p class="stk-sub">${sub}</p>
-      <div class="stk-card">${nfc && !mini ? `<div class="stk-row">${nfcDot}<div class="stk-qrw"><div class="stk-qr">${qr}</div><small>NFC가 안 되면 QR</small></div></div>`
-        : `${nfc ? nfcDot : ''}<div class="stk-qr">${qr}</div>${nfc ? '<small class="stk-cap">NFC가 안 되면 QR</small>' : ''}`}
-        <b class="stk-store">${o.store || '매장명'}</b>${o.loc ? `<span class="stk-loc">${o.loc}</span>` : ''}</div>
-      <div class="stk-foot">${o.extra ? `<b class="stk-extra">${o.extra}</b>` : ''}${nfc && !mini ? '<small class="stk-note">안드로이드는 설정에서 NFC를 켜 주세요 · 아이폰은 화면만 켜져 있으면 돼요</small>' : ''}
-        ${o.home ? `<span class="stk-home ${o.guide ? 'ga' : ''}">${o.home}</span>` : o.guide ? '<span class="stk-home ga empty">홈페이지 자리 · 비우면 빠져요</span>' : ''}</div>
-    </div></div>`;
+    const nfc = o.ver === 'nfc', qr = fakeQR(o.seed || 7, 33);
+    const logoIn = o.logo ? `<img class="stk-logo-img" src="${o.logo}" alt="매장 로고">` : `<span class="stk-wc"><img src="../assets/brand/symbol.png" alt="">workchip</span>`;
+    const logo = `<div class="stk-logo ${o.guide ? 'ga' : ''}">${o.guide ? '<em class="ga-tag">매장 로고로 바꿀 수 있는 자리</em>' : ''}${logoIn}</div>`;
+    const store = `<b class="stk-store">${o.store || '매장명'}</b>${o.loc ? `<span class="stk-loc">${o.loc}</span>` : ''}`;
+    const card = nfc ? `<div class="stk-card nfc"><div class="stk-row"><div class="stk-nfc">${ic('mono/smartphone')}<b>여기에 폰 대기</b><small>NFC</small></div><div class="stk-qrw"><div class="stk-qr">${qr}</div><small>NFC가 안 되면 QR</small></div></div>${store}</div>`
+      : `<div class="stk-card"><div class="stk-qr">${qr}</div>${store}</div>`;
+    const home = o.home ? `<div class="stk-home ${o.guide ? 'ga' : ''}">${ic('mono/globe')}${o.home}</div>` : o.guide ? '<div class="stk-home ga hz-none">홈페이지 넣는 자리 · 선택</div>' : '';
+    return `<div class="stk ${nfc ? 'nfc' : ''} ${o.guide ? 'guide' : ''}"><div class="stk-in">
+      <div><div class="stk-top">${logo}<em class="stk-badge">${nfc ? '출퇴근 NFC · QR' : '출퇴근 QR'}</em></div>
+        <h3 class="stk-h">${nfc ? '폰 대면' : 'QR 찍으면'}<br><span>출근 끝</span></h3>
+        <p class="stk-sub">${nfc ? '휴대폰을 대면 <b>바로 출근·퇴근</b>이 기록돼요' : '카메라로 찍으면 <b>바로 출근·퇴근</b>이 기록돼요'}</p></div>
+      ${card}
+      <div class="stk-foot">${o.extra || nfc ? `<div>${o.extra ? `<b class="stk-extra">${o.extra}</b>` : ''}${nfc ? '<small class="stk-note">안드로이드는 설정에서 NFC를 켜 주세요 · 아이폰은 화면만 켜져 있으면 돼요</small>' : ''}</div>` : ''}${home}</div>
+    </div><img class="stk-char" src="../assets/brand/character.png" alt=""></div>`;
   }
 
   /* ───────── 페이지 ───────── */
@@ -47,26 +47,23 @@
     const cnt = (k, v) => `<span class="cnt-l tnum" data-cnt="${k}">${(v || '').length}/${LIM[k]}</span>`;
     return head + `<div class="stk-grid"><div class="stk-form">
       ${sec(1, '버전', '', `<div class="pick cards stk-ver" id="kVer">
-        <button type="button" data-v="qr" aria-pressed="${o.ver === 'qr'}">${ic('color/qr')}<span><b>QR 스티커</b><small>휴대폰 카메라로 찍으면 기록 · 모든 스마트폰</small><em class="tnum">장당 ${won(PRICE.qr)}</em></span></button>
-        <button type="button" data-v="nfc" aria-pressed="${o.ver === 'nfc'}">${ic('color/auth-nfc')}<span><b>NFC + QR 스티커</b><small>파란 원에 폰을 대면 기록 · 안 되는 폰은 QR</small><em class="tnum">장당 ${won(PRICE.nfc)} <i>NFC +${won(PRICE.nfc - PRICE.qr)}</i></em></span></button></div>
+        <button type="button" data-v="qr" aria-pressed="${o.ver === 'qr'}">${ic('color/qr')}<span><b>QR 스티커</b><small>휴대폰 카메라로 찍으면 기록 · 모든 스마트폰 · 10.2 × 15.2 cm</small><em class="tnum">장당 ${won(PRICE.qr)}</em></span></button>
+        <button type="button" data-v="nfc" aria-pressed="${o.ver === 'nfc'}">${ic('color/auth-nfc')}<span><b>NFC + QR 스티커</b><small>파란 원에 폰을 대면 기록 · 안 되는 폰은 QR · 10.2 × 15.2 cm</small><em class="tnum">장당 ${won(PRICE.nfc)}</em><i class="nfc-plus">NFC +${won(PRICE.nfc - PRICE.qr)}</i></span></button></div>
         <p class="stk-tip" id="kNfcTip" ${o.ver === 'nfc' ? '' : 'hidden'}>${ic('mono/info')}금속 위에 붙이면 NFC가 인식되지 않아요. 벽 · 나무 · 유리 · 아크릴 위에 붙여 주세요.</p>`)}
-      ${sec(2, '사이즈', '두 사이즈 모두 높이는 같고 폭만 달라요. 가격은 같아요.', `<div class="pick cards stk-size" id="kSize">
-        <button type="button" data-v="std" aria-pressed="${o.size === 'std'}"><i class="sz std"></i><span><b>기본</b><small class="tnum">10.2 × 15.2 cm · 출입구 벽 · 휴게실</small></span></button>
-        <button type="button" data-v="mini" aria-pressed="${o.size === 'mini'}"><i class="sz mini"></i><span><b>미니</b><small class="tnum">5.1 × 15.2 cm · 기둥 · 문틀 · 포스기 옆</small></span></button></div>`)}
-      ${sec(3, '근무지와 수량', '근무지마다 출퇴근 QR이 달라요. 붙일 근무지의 수량을 정하고 매장명 · 붙이는 위치를 적어 주세요.', `<div class="stk-lines">${wps().map((w) => { const l = o.lines[w.n]; return `<div class="stk-line ${l.q ? 'on' : ''}" data-wp="${w.n}">
+      ${sec(2, '근무지와 수량', '근무지마다 출퇴근 QR이 달라요. 붙일 근무지의 수량을 정하고 매장명 · 붙이는 위치를 적어 주세요.', `<div class="stk-lines">${wps().map((w) => { const l = o.lines[w.n]; return `<div class="stk-line ${l.q ? 'on' : ''}" data-wp="${w.n}">
           <div class="sl-h"><span class="sl-n">${ic('color/nav-workplaces')}<span><b>${w.n}</b><small>${A.CERT[w.cert][1]}</small></span></span>${ui.stepper('q_' + w.n, l.q, '장').replace('class="stepper"', `class="stepper" data-max="20" data-q="${w.n}"`)}</div>
           <div class="sl-b" ${l.q ? '' : 'hidden'}>
             <label class="sl-f"><span>매장명 <i class="sl-req">필수</i></span><input class="input sm" data-f="store" data-wp="${w.n}" maxlength="13" value="${l.store}">${cnt('store', l.store).replace('data-cnt="store"', `data-cnt="store-${w.n}"`)}</label>
             <label class="sl-f"><span>붙이는 위치 <i>선택</i></span><input class="input sm" data-f="loc" data-wp="${w.n}" maxlength="15" value="${l.loc}" placeholder="예: 주방 출입구 옆">${cnt('loc', l.loc).replace('data-cnt="loc"', `data-cnt="loc-${w.n}"`)}</label></div></div>`; }).join('')}</div>`, '<span class="af-badge tnum" id="kQty"></span>')}
-      ${sec(4, '문구와 로고', '모든 스티커에 같이 들어가요. 비워 두면 그 자리 없이 깔끔하게 나와요. 큰 제목과 QR · NFC 자리는 바꿀 수 없어요.', `
+      ${sec(3, '문구와 로고', '모든 스티커에 같이 들어가요. 비워 두면 그 자리 없이 깔끔하게 나와요. 큰 제목과 QR · NFC 자리는 바꿀 수 없어요.', `
         <label class="sl-f wide"><span>한 줄 안내 <i>선택</i></span><input class="input sm" id="kExtra" maxlength="22" value="${o.extra}" placeholder="예: 근무 시작 10분 전까지 찍어 주세요">${cnt('extra', o.extra)}</label>
         <div class="field"><span class="field-label">로고</span><div class="pick stk-lg" id="kLogo">
           <button type="button" data-v="wc" aria-pressed="${!o.logo}">${ic('mono/image')}워크칩 로고 (기본)</button><button type="button" data-v="mine" aria-pressed="${!!o.logo}">${ic('mono/image-add')}우리 매장 로고로 바꾸기</button></div>
           <div class="stk-up" id="kUp" ${o.logo ? '' : 'hidden'}>
             <label class="up-box">${o.logo ? `<img src="${o.logo}" alt="">` : `${ic('mono/upload')}<b>로고 파일 올리기</b>`}<small>${o.logo ? `가로 ${o.logoW}px · 다른 파일로 바꾸려면 누르세요` : 'PNG · JPG · SVG · 배경이 투명하고 가로 1,000px 이상'}</small><input type="file" id="kFile" accept="image/png,image/jpeg,image/svg+xml,image/webp" hidden></label>
-            <p class="field-hint ${o.logo && o.logoW && o.logoW < 1000 ? 'err' : ''}" id="kLogoHint">${o.logo && o.logoW && o.logoW < 1000 ? '가로 1,000px보다 작아 인쇄하면 흐릴 수 있어요' : '워크칩 로고 자리(기본 4.4 × 0.9 cm · 미니 3.7 × 0.75 cm)에 비율을 지켜 들어가요. 흰색 로고는 안 보이니 진한 색으로 올려 주세요.'}</p></div></div>
+            <p class="field-hint ${o.logo && o.logoW && o.logoW < 1000 ? 'err' : ''}" id="kLogoHint">${o.logo && o.logoW && o.logoW < 1000 ? '가로 1,000px보다 작아 인쇄하면 흐릴 수 있어요' : '맨 위 워크칩 로고 자리(4.4 × 0.9 cm)에 비율을 지켜 들어가요. 흰색 로고는 안 보이니 진한 색으로 올려 주세요.'}</p></div></div>
         <label class="sl-f wide"><span>홈페이지 <i>선택</i></span><input class="input sm" id="kHome" maxlength="30" value="${o.home}" placeholder="예: solv.co.kr  (https:// 는 빼고)">${cnt('home', o.home)}</label>`)}
-      ${sec(5, '배송지', '', `<div class="row2">${ui.field('받는 분', `<input class="input sm" data-s="name" value="${o.ship.name}">`)}${ui.field('연락처', `<input class="input sm" data-s="phone" type="tel" value="${o.ship.phone}">`)}</div>
+      ${sec(4, '배송지', '', `<div class="row2">${ui.field('받는 분', `<input class="input sm" data-s="name" value="${o.ship.name}">`)}${ui.field('연락처', `<input class="input sm" data-s="phone" type="tel" value="${o.ship.phone}">`)}</div>
         ${ui.field('주소', `<div class="copy-in"><input class="input sm" data-s="addr" value="${o.ship.addr}"><button type="button" class="btn btn-grey btn-sm" data-act="stkAddr">${ic('glyph/search')}주소 찾기</button></div>`)}
         <div class="row2">${ui.field('상세 주소', `<input class="input sm" data-s="addr2" value="${o.ship.addr2}">`)}${ui.field('배송 요청 <span class="opt">선택</span>', `<input class="input sm" data-s="memo" value="${o.ship.memo}" placeholder="예: 매장 오픈 전 경비실">`)}</div>`)}
     </div>
@@ -85,14 +82,14 @@
     const cmp = o.logo && o.view === 1;
     pv.className = `pv-box ${o.size} ${cmp ? 'cmp' : ''}`;
     pv.innerHTML = cmp ? `<figure>${sticker({ ...base, logo: null })}<figcaption>기본 · 워크칩 로고</figcaption></figure><figure>${sticker({ ...base, logo: o.logo })}<figcaption>바꾼 뒤 · 우리 로고</figcaption></figure>`
-      : `<figure>${sticker({ ...base, logo: o.logo })}<figcaption>${o.logo ? '우리 매장 로고 적용' : '기본 · 워크칩 로고'} · ${o.size === 'std' ? '기본 10.2 × 15.2 cm' : '미니 5.1 × 15.2 cm'}</figcaption></figure>`;
+      : `<figure>${sticker({ ...base, logo: o.logo })}<figcaption>${o.logo ? '우리 매장 로고 적용' : '기본 · 워크칩 로고'} · 10.2 × 15.2 cm</figcaption></figure>`;
     $('#kPvWp', p).innerHTML = on.length > 1 ? `${ic('mono/info')}${pvWp.n} 스티커예요 · 나머지 ${on.length - 1}곳은 매장명 · 위치만 달라요` : '';
     $('#kQty', p).textContent = `${on.length}곳 · ${qty}장`;
     const sub = qty * PRICE[o.ver], total = sub + (qty ? SHIP : 0);
     const miss = on.find((w) => !o.lines[w.n].store.trim());
     const err = !qty ? '근무지 수량을 1장 이상 넣어 주세요' : miss ? `${miss.n} 매장명을 적어 주세요` : !o.ship.name || !o.ship.addr ? '배송지를 적어 주세요' : o.logo === '' ? '' : '';
     $('#kSum', p).innerHTML = `<b class="sum-t">결제 금액</b>
-      <div class="summary"><div><span>${o.ver === 'nfc' ? 'NFC + QR' : 'QR'} 스티커 · ${o.size === 'std' ? '기본' : '미니'}</span><b class="tnum">${won(PRICE[o.ver])} × ${qty}장</b></div>
+      <div class="summary"><div><span>${o.ver === 'nfc' ? 'NFC + QR' : 'QR'} 스티커</span><b class="tnum">${won(PRICE[o.ver])} × ${qty}장</b></div>
         ${o.ver === 'nfc' && qty ? `<div class="sub"><span>└ QR ${won(PRICE.qr)} + NFC ${won(PRICE.nfc - PRICE.qr)}</span><b></b></div>` : ''}
         <div><span>상품 금액</span><b class="tnum">${won(sub)}</b></div><div><span>배송비</span><b class="tnum">${qty ? won(SHIP) : '—'}</b></div>
 </div>
@@ -108,7 +105,6 @@
     if (t !== 0) return;
     upd(p);
     $('#kVer', p).addEventListener('change', () => { o.ver = pickVals($('#kVer', p))[0]; $('#kNfcTip', p).hidden = o.ver !== 'nfc'; upd(p); });
-    $('#kSize', p).addEventListener('change', () => { o.size = pickVals($('#kSize', p))[0]; upd(p); });
     $('#kLogo', p).addEventListener('change', () => { const mine = pickVals($('#kLogo', p))[0] === 'mine'; $('#kUp', p).hidden = !mine; if (!mine) { o.logo = null; render(); } else if (!o.logo) $('#kFile', p).click(); });
     $('#kFile', p).onchange = (e) => {
       const f = e.target.files[0]; if (!f) return;
@@ -136,7 +132,7 @@
     const o = st(), on = wps().filter((w) => o.lines[w.n].q > 0), qty = on.reduce((a, w) => a + o.lines[w.n].q, 0), total = qty * PRICE[o.ver] + SHIP;
     const M = [['card', '신용 · 체크카드', 'mono/wallet'], ['kakao', '카카오페이', 'mono/chat'], ['naver', '네이버페이', 'mono/star'], ['toss', '토스페이', 'mono/zap'], ['bank', '계좌이체', 'mono/buildings']];
     const m = openModal({ title: '결제하기', size: 'lg', body: `
-      <div class="box"><div class="summary"><div><span>상품</span><b>${o.ver === 'nfc' ? 'NFC + QR' : 'QR'} 스티커 · ${o.size === 'std' ? '기본' : '미니'} × ${qty}장</b></div><div><span>근무지</span><b>${on.map((w) => `${w.n} ${o.lines[w.n].q}장`).join(' · ')}</b></div>
+      <div class="box"><div class="summary"><div><span>상품</span><b>${o.ver === 'nfc' ? 'NFC + QR' : 'QR'} 스티커 × ${qty}장</b></div><div><span>근무지</span><b>${on.map((w) => `${w.n} ${o.lines[w.n].q}장`).join(' · ')}</b></div>
         <div><span>로고</span><b>${o.logo ? '우리 매장 로고' : '워크칩 로고'}</b></div><div><span>받는 곳</span><b>${o.ship.name} · ${o.ship.addr} ${o.ship.addr2}</b></div></div></div>
       <div class="field"><span class="field-label">결제 수단</span><div class="pick cards pay-m" id="pm">${M.map(([k, l, i], j) => `<button type="button" data-v="${k}" aria-pressed="${!j}">${ic(i)}${l}</button>`).join('')}</div></div>
       <div class="field" id="pmCard"><span class="field-label">카드</span>${ui.select('pc', ['현대카드', '신한카드', '삼성카드', 'KB국민카드', '롯데카드', '하나카드', 'NH농협카드'])}${ui.field('할부', ui.select('pi', ['일시불', '2개월', '3개월']))}</div>
@@ -152,7 +148,7 @@
       m.setBody('<div class="ai-think"><i></i><i></i><i></i><span>결제하고 있어요</span></div>'); m.setFooter('');
       setTimeout(() => {
         const no = `WC-2611-${String(Math.floor(Math.random() * 9000) + 1000)}`;
-        o.orders.unshift({ no, at: '2026.11.13', items: `${o.ver === 'nfc' ? 'NFC + QR' : 'QR'} 스티커 · ${o.size === 'std' ? '기본' : '미니'} × ${qty}장`, wp: on.length > 1 ? `${on[0].n} 외 ${on.length - 1}곳` : on[0].n, total, step: 1, pay, logo: !!o.logo });
+        o.orders.unshift({ no, at: '2026.11.13', items: `${o.ver === 'nfc' ? 'NFC + QR' : 'QR'} 스티커 × ${qty}장`, wp: on.length > 1 ? `${on[0].n} 외 ${on.length - 1}곳` : on[0].n, total, step: 1, pay, logo: !!o.logo });
         m.setBody(`<div class="done">${ic('color/ap-approved')}<h3>${pay === '계좌이체' ? '주문을 받았어요' : '결제를 마쳤어요'}</h3><p>주문 번호 <b class="tnum">${no}</b> · ${won(total)}</p></div>
           <ol class="ord-steps big">${['결제 완료', '제작 중', '발송', '도착'].map((s, i) => `<li class="${i === 0 ? 'on' : ''}"><i></i><span>${s}</span></li>`).join('')}</ol>
           <p class="sum-note" style="text-align:center">3–5 영업일 안에 보내 드려요. 발송하면 카카오톡으로 송장 번호를 알려 드려요.<br>받은 스티커는 붙인 뒤 점장님 폰으로 한 번 찍어 이 매장으로 기록되는지 확인해 주세요.</p>`);
@@ -183,7 +179,6 @@
     return `<div class="stk-grid fp"><div class="stk-form"><section class="card stk-sec">
         <div class="box blue fp-info">${ic('mono/info')}<div><b>직접 인쇄해서 붙일 수 있어요 · 무료</b><p>QR 스티커만 인쇄할 수 있어요. 로고는 워크칩 로고로 고정되고, NFC는 태그가 필요해 주문해야 해요.</p></div></div>
         ${ui.field('근무지', ui.select('fpWp', wps().map((w) => w.n), f.wp))}
-        ${ui.field('사이즈', ui.seg([['std', '기본 10.2 × 15.2 cm'], ['mini', '미니 5.1 × 15.2 cm']], f.size === 'mini' ? 1 : 0, 'block').replace('class="segment ', 'id="fpSize" class="segment '))}
         <label class="sl-f wide"><span>붙이는 위치 <i>선택</i></span><input class="input sm" id="fpLoc" maxlength="15" value="${f.loc || ''}" placeholder="예: 주방 출입구 옆"></label>
         <div class="fp-lock">${ic('mono/lock')}<span><b>로고 바꾸기 · NFC</b><small>주문하기에서 쓸 수 있어요</small></span><button class="btn btn-grey btn-sm" data-goto="sticker" data-tab="0" onclick="A.S.tab.sticker=0;A.render()">주문하러 가기</button></div>
         <ul class="fp-tips"><li>무광 용지 · 실제 크기(100%)로 인쇄하세요. 유광은 조명이 반사돼 잘 안 찍혀요</li><li>눈높이(바닥에서 120–150cm), 평평하고 마른 곳에 붙여 주세요</li><li>붙인 뒤 점장님 폰으로 한 번 찍어 이 매장으로 기록되는지 확인해요</li></ul>
@@ -192,14 +187,13 @@
   }
   const fpSticker = () => { const o = st(), f = o.fp, w = wps().find((x) => x.n === f.wp); return sticker({ size: f.size, ver: 'qr', store: `SOLV ${w.n}`.slice(0, 13), loc: f.loc || '', extra: o.extra, logo: null, seed: w.n.length * 13 + 5 }); };
   function afterPrint(p) {
-    const f = st().fp, draw = () => { const b = $('#fpPv', p); b.className = `pv-box ${f.size}`; b.innerHTML = `<figure>${fpSticker()}<figcaption>${f.wp} · ${f.size === 'std' ? '기본' : '미니'}</figcaption></figure>`; };
+    const f = st().fp, draw = () => { const b = $('#fpPv', p); b.className = `pv-box ${f.size}`; b.innerHTML = `<figure>${fpSticker()}<figcaption>${f.wp} · 10.2 × 15.2 cm</figcaption></figure>`; };
     $('#fpWp', p).onchange = (e) => { f.wp = e.target.value; draw(); };
-    $('#fpSize', p).addEventListener('change', (e) => { f.size = e.detail; draw(); });
     $('#fpLoc', p).oninput = (e) => { f.loc = e.target.value; draw(); };
     draw();
   }
   acts.stkPrint = () => {
-    const f = st().fp, w = f.size === 'std' ? '101.6mm' : '50.8mm', css = (h) => new URL(`../assets/${h}`, location.href).href;
+    const f = st().fp, w = '101.6mm', css = (h) => new URL(`../assets/${h}`, location.href).href;
     const fr = document.createElement('iframe'); fr.style.cssText = 'position:fixed;width:0;height:0;border:0;right:0;bottom:0'; document.body.appendChild(fr);
     fr.contentDocument.write(`<!doctype html><html lang="ko"><head><meta charset="utf-8"><base href="${location.href}"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"><link rel="stylesheet" href="${css('tokens.css')}"><link rel="stylesheet" href="${css('admin.css')}">
       <style>@page{size:${w} 152.4mm;margin:0}html,body{margin:0;background:#fff}.stk{width:${w}!important;border-radius:0!important;box-shadow:none!important}</style></head><body>${fpSticker()}</body></html>`);
