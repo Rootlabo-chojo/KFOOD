@@ -27,7 +27,7 @@
     const store = `<b class="stk-store">${o.store || '매장명'}</b>${o.loc ? `<span class="stk-loc">${o.loc}</span>` : ''}`;
     const card = nfc ? `<div class="stk-card nfc"><div class="stk-row"><div class="stk-nfc">${ic('mono/smartphone')}<b>여기에 폰 대기</b><small>NFC</small></div><div class="stk-qrw"><div class="stk-qr">${qr}</div><small>NFC가 안 되면 QR</small></div></div>${store}</div>`
       : `<div class="stk-card"><div class="stk-qr">${qr}</div>${store}</div>`;
-    const home = o.home ? `<div class="stk-home ${o.guide ? 'ga' : ''}">${ic('mono/globe')}${o.home}</div>` : o.guide ? '<div class="stk-home ga hz-none">홈페이지 넣는 자리 · 선택</div>' : '';
+    const home = o.home ? `<div class="stk-home ${o.guide ? 'ga' : ''}">${o.home}</div>` : o.guide ? '<div class="stk-home ga hz-none">홈페이지 넣는 자리 · 선택</div>' : '';
     return `<div class="stk ${nfc ? 'nfc' : ''} ${o.guide ? 'guide' : ''}"><div class="stk-in">
       <div><div class="stk-top">${logo}<em class="stk-badge">${nfc ? '출퇴근 NFC · QR' : '출퇴근 QR'}</em></div>
         <h3 class="stk-h">${nfc ? '폰 대면' : 'QR 찍으면'}<br><span>출근 끝</span></h3>
