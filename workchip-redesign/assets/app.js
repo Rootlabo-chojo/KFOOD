@@ -352,7 +352,7 @@
       </section>
       ${S.role === 'mgr' ? `<p class="list-h">매니저 메뉴</p><section class="card list">${r('nav-members', '우리 팀 현황', '5명', 'team')}${r('calendar-check', '승인할 일', `${S.mgr.leave.length + S.mgr.req.length + S.mgr.dev.length}건`, 'approveAll')}${r('nav-schedules', '팀 근무표', '', 'teamSched')}</section>` : ''}
       <section class="card list">
-        ${r('login-info', '로그인 정보', '', 'loginInfo')}${r('biz-dashboard', '사업자 대시보드', '', 'admin')}${r('logout', '로그아웃', '', 'logout')}
+        ${r('login-info', '로그인 정보', '', 'loginInfo')}${r('biz-dashboard', '사업자 대시보드', '', 'admin')}${r('qr', 'QR 스티커 신청', '대시보드에서', 'sticker')}${r('logout', '로그아웃', '', 'logout')}
       </section>
       <section class="card list">${r('add-home', '앱 버전', '<span class="ver">2.4.0</span><em class="ver-ok">최신</em>', 'version')}</section>
       <button class="more center" data-a="privacy">개인정보처리방침</button>
@@ -387,6 +387,12 @@
     mstep: (b) => { S.month = Math.min(10, Math.max(7, S.month + +b.dataset.d)); route(); },
     ystep: (b) => { S.year = Math.min(2026, Math.max(2025, (S.year || 2026) + +b.dataset.d)); toast(S.year === 2025 ? '2025년은 부여 15일 · 사용 15일이에요 (시안은 같은 화면)' : '2026년'); route(); },
     noop: () => {},
+    sticker: () => { const sh = info(null, `<div class="sheet-qr">${charImg('working', 'float sm')}<h3>QR 스티커는 사업자 대시보드에서 신청해요</h3><p>버전 · 수량 · 매장 로고를 고르고 결제까지<br>PC 웹 대시보드에서 한 번에 할 수 있어요.</p><div class="pr"><span>QR 5,000원</span><span>NFC + QR 10,000원</span><span>배송비 3,000원</span></div></div>
+      ${ui.field('대시보드 주소', '<div class="copy-in"><input class="input sm" readonly value="admin.workchip.co.kr/sticker"><button type="button" class="btn btn-grey btn-sm" id="cp">복사</button></div>', 'PC에서 열거나 링크를 나에게 보내 두세요')}`,
+      '<button class="btn btn-grey btn-lg" id="sm">링크 나에게 보내기</button><button class="btn btn-primary btn-lg" id="go">대시보드 열기</button>');
+      sh.$('#cp').onclick = () => { navigator.clipboard?.writeText('https://admin.workchip.co.kr/sticker'); toast('주소를 복사했어요'); };
+      sh.$('#sm').onclick = () => { sh.close(); toast('카카오톡으로 링크를 보냈어요 (시안)'); };
+      sh.$('#go').onclick = () => (location.href = '../admin/#/sticker'); },
     protoMode: () => { HOV = loginMode(clockNow().getHours()) === 'work' ? 21 : 10; route(); },
     version: () => info('앱 버전', `<div class="done">${charImg('working', 'float sm')}<h3>최신 버전을 쓰고 있어요</h3><p>워크칩 2.4.0 · 2026.10.27 업데이트</p></div><div class="summary"><div><span>이번 업데이트</span><b>매니저 화면 · 출근/퇴근 로그인</b></div><div><span>지원 기기</span><b>iOS 15 · Android 9 이상</b></div></div>`),
     role: () => {

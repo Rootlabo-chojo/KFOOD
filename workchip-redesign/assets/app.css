@@ -850,8 +850,8 @@ body[data-dev="inapp"] .phone { padding-top: 92px; }
 .ins-pc { display: none; }
 @media (min-width: 900px) {
   body[data-dev="pc"] .ins-pc { position: fixed; z-index: 50; top: 50%; left: calc(50% + 235px); transform: translateY(-50%); width: 300px; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 26px 22px 20px; border-radius: 28px; background: #fff; box-shadow: 0 12px 40px rgba(25,31,40,.10); }
-  body[data-dev="pc"] .phone { transform: translateX(-170px); }
-  body[data-dev="pc"] .tabbar { margin-left: -170px; }
+  body[data-dev="pc"] .phone { position: relative; left: -170px; }
+  body[data-dev="pc"] .tabbar { left: calc(50% - 170px); }
 }
 .ins-pc-h { display: flex; flex-direction: column; align-items: center; }
 .ins-pc-char { width: 110px; height: 86px; }
@@ -866,3 +866,13 @@ body[data-dev="inapp"] .phone { padding-top: 92px; }
 .store b { display: block; font-size: 12px; }
 .ins-note { margin-top: 10px; font-size: 11px; color: var(--text-weak); }
 .dev-chip { left: auto; right: max(10px, calc(50% - 205px)); }
+
+/* PC에서 탭바가 폰 화면 폭 · 아래에 붙도록 */
+@media (min-width: 600px) { .tabbar { width: 430px; max-width: 430px; } .ins-bar { width: 406px; } }
+.sheet-qr { display:flex; flex-direction:column; align-items:center; text-align:center; gap:6px; }
+.sheet-qr h3 { margin: 4px 0 0; font-size: 20px; color: var(--text-strong); }
+.sheet-qr p { margin: 0; font-size: 14px; color: var(--text-sub); }
+.sheet-qr .pr { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-top:6px; }
+.sheet-qr .pr span { font-size:12px; font-weight:700; padding:5px 10px; border-radius:999px; background:var(--grey-100); color:var(--text); }
+@media (min-width: 900px) { body[data-dev="pc"].app-layers .layer-sheet .layer-box { left: calc(50% - 170px); } }
+.copy-in { display: flex; gap: 8px; align-items: center; } .copy-in .input { flex: 1; min-width: 0; } .copy-in .btn { height: 48px; flex: none; }

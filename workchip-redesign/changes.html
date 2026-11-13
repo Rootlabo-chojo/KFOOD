@@ -75,6 +75,8 @@
   .thumbs figcaption { font-size: 8pt; }
   .thumbs small { display: block; font-size: 7.5pt; color: #8B95A1; margin-top: 0.8mm; line-height: 1.35; }
   .mthumbs { display: grid; grid-template-columns: repeat(6, 1fr); gap: 5mm; }
+  .x7 img.nat { max-height: 92mm; width: auto; max-width: 100%; object-fit: contain; object-position: top; }
+  .x7 .changes li { padding-bottom: 1.2mm; font-size: 9pt; } .x7 .tbl td { padding: 1.6mm 3mm; }
 </style>
 </head>
 <body>
@@ -392,6 +394,28 @@ function v3() {
 
 
 
+
+function v10() {
+  const d = (f, c) => fig(A + f + '.jpg', c, 'desk');
+  return `<section class="page">
+    <div class="eyebrow">X7 · v10 QR 스티커 신청 · 앱 PC 푸터</div><h1>설정 › QR 스티커 신청 — 주문 · 결제 · 무료 인쇄</h1>
+    <div class="v-grid" style="grid-template-columns:repeat(4,1fr)">${d('v10-order', '주문하기 · 버전 · 사이즈')}${d('v10-pay', '결제하기')}${d('v10-hist', '주문 내역 · 진행 단계')}${d('v10-print', '무료로 인쇄 · 워크칩 로고 고정')}</div>
+    <div class="v-row x7" style="grid-template-columns:.55fr .55fr 1fr;align-items:start"><div class="v-grid">${fig(A + 'v10-guide.jpg', '우리 로고 · 바꿀 수 있는 자리', 'nat')}</div><div class="v-grid">${fig(A + 'v10-mini.jpg', '기본과 비교 · 미니', 'nat')}</div>
+      <div><table class="tbl" style="font-size:8.6pt"><tr><th>항목</th><th>값</th></tr>
+        <tr><td>QR 스티커</td><td>장당 5,000원 · 모든 스마트폰</td></tr><tr><td>NFC + QR 스티커</td><td>장당 10,000원 (QR 5,000 + NFC 5,000)</td></tr>
+        <tr><td>배송비</td><td>주문 1건당 3,000원 → QR 1장 8,000원 · NFC 1장 13,000원</td></tr>
+        <tr><td>사이즈</td><td>기본 10.2 × 15.2 cm · 미니 5.1 × 15.2 cm (같은 가격)</td></tr>
+        <tr><td>바꿀 수 있는 곳</td><td>매장명 13자(필수) · 붙이는 위치 15자 · 한 줄 안내 22자 · 매장 로고 · 홈페이지 30자</td></tr>
+        <tr><td>무료 인쇄</td><td>QR만 · 워크칩 로고 고정 · 실제 크기 인쇄</td></tr></table>
+      <ol class="changes" style="margin-top:3mm"><li><b>메뉴</b> — 사이드바 설정 아래 "QR 스티커 신청" · AI 찾기에서도 찾을 수 있어요</li>
+        <li><b>주문</b> — ① 버전 ② 사이즈 ③ 근무지별 수량 · 매장명 · 위치 ④ 문구와 로고 ⑤ 배송지 → 오른쪽 미리보기 · 결제 금액이 바로 바뀌어요</li>
+        <li><b>로고 바꾸기</b> — 파일을 올리면 미리보기에 바로 들어가고, "기본과 비교"로 전 · 후를 나란히. 가로 1,000px보다 작으면 경고</li>
+        <li><b>결제</b> — 카드 · 카카오페이 · 네이버페이 · 토스페이 · 계좌이체, 동의 후 결제 → 주문 번호 · 진행 단계(결제 완료 → 제작 중 → 발송 → 도착) · 영수증 · 취소(제작 전)</li>
+        <li><b>앱</b> — 전체 › "QR 스티커 신청"은 "사업자 대시보드에서 신청해요" 안내 + 주소 복사 · 대시보드 열기</li>
+        <li><b>앱 PC 푸터</b> — PC에서 탭바가 폰 화면 아래에 붙도록 수정</li></ol></div></div>
+    ${foot('v10 QR 스티커')}</section>`;
+}
+
 function v9() {
   const sh = (f, c) => fig(A + f + '.jpg', c, 'mob');
   return `<section class="page">
@@ -518,7 +542,7 @@ function summary() {
         <li><b>문장은 짧고 해요체</b> — "휴가 등록하기" → "휴가 등록", 반복 문구 제거</li>
         <li><b>라이트 모드 기본</b> · 브랜드 표기 "워크칩" · 로고는 심볼 + workchip</li>
       </ol></div>
-      <div><h2>화면 목록</h2><ul class="toc"><li><span>X</span><b>v4 – v9 피드백 반영 (X1 – X6)</b></li><li><span>W</span><b>v3 피드백 반영 (W1–W7)</b></li><li><span>V</span><b>v2 피드백 반영 (V1–V9)</b></li>${toc}<li><span>C</span>브랜드 표기 · 디자인 토큰</li><li><span>D</span>개발 반영 체크리스트</li></ul></div>
+      <div><h2>화면 목록</h2><ul class="toc"><li><span>X</span><b>v4 – v10 피드백 반영 (X1 – X7)</b></li><li><span>W</span><b>v3 피드백 반영 (W1–W7)</b></li><li><span>V</span><b>v2 피드백 반영 (V1–V9)</b></li>${toc}<li><span>C</span>브랜드 표기 · 디자인 토큰</li><li><span>D</span>개발 반영 체크리스트</li></ul></div>
     </div>
     ${foot('요약')}
   </section>`;
@@ -606,7 +630,7 @@ function checklist() {
   </section>`;
 }
 
-document.getElementById('doc').innerHTML = cover() + summary() + v9() + v8() + v7() + v6() + v5() + v4() + v3() + v2() + brand() + SCREENS.map(screen).join('') + extra() + checklist();
+document.getElementById('doc').innerHTML = cover() + summary() + v10() + v9() + v8() + v7() + v6() + v5() + v4() + v3() + v2() + brand() + SCREENS.map(screen).join('') + extra() + checklist();
 </script>
 </body>
 </html>
