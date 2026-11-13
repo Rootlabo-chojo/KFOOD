@@ -840,3 +840,36 @@ td.cell:hover .cell-empty { color: var(--grey-400); }
 .fp-lock > span { display: flex; flex-direction: column; }
 .stk-wc { font-size: calc(54 * var(--u)); } .stk-wc img { height: calc(60 * var(--u)); }
 .stk-qr { padding: calc(32 * var(--u)); } .stk-card.nfc .stk-qr { padding: calc(20 * var(--u)); }
+
+/* ───── 가로형 스티커 (1844 × 1240px 기준, 1px = var(--u)) ───── */
+.stk.land { --u: calc(100cqw / 1844); aspect-ratio: 1844 / 1240; }
+.stk.land .stk-in { left: calc(92 * var(--u)); top: calc(92 * var(--u)); width: calc(1660 * var(--u)); height: calc(1056 * var(--u)); flex-direction: row; justify-content: space-between; align-items: stretch; gap: calc(56 * var(--u)); }
+.stk-l { position: relative; flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.stk.land .stk-badge { align-self: flex-start; margin-top: calc(34 * var(--u)); }
+.stk.land .stk-h { margin-top: calc(30 * var(--u)); font-size: calc(108 * var(--u)); }
+.stk.land .stk-sub { margin-top: calc(20 * var(--u)); font-size: calc(38 * var(--u)); line-height: 1.4; }
+.stk.land .stk-char { position: static; align-self: flex-start; width: calc(210 * var(--u)); margin-top: calc(28 * var(--u)); }
+.stk.land .stk-foot { margin-top: auto; align-items: flex-start; text-align: left; gap: calc(16 * var(--u)); }
+.stk.land .stk-foot > div { align-items: flex-start; }
+.stk.land .stk-home { width: auto; justify-content: flex-start; padding: 0 calc(10 * var(--u)); }
+.stk.land .stk-note { font-size: calc(24 * var(--u)); }
+.stk.land .stk-card { width: calc(860 * var(--u)); flex: none; justify-content: center; padding: calc(48 * var(--u)) 0; }
+.stk.land .stk-qr { width: calc(620 * var(--u)); }
+.stk.land.nfc .stk-card { width: calc(980 * var(--u)); padding: calc(48 * var(--u)) calc(44 * var(--u)); }
+.stk.land.nfc .stk-row { gap: calc(36 * var(--u)); }
+.stk.land.nfc .stk-nfc { width: calc(400 * var(--u)); height: calc(400 * var(--u)); }
+.stk.land.nfc .stk-qr { width: calc(450 * var(--u)); }
+.stk.land .stk-store { margin-top: calc(44 * var(--u)); }
+.stk.land.guide::after { left: calc(22 * var(--u)); top: calc(20 * var(--u)); right: calc(22 * var(--u)); bottom: calc(20 * var(--u)); }
+.pv-box.land figure { width: 100%; max-width: 360px; }
+.pv-box.land.cmp { flex-direction: column; align-items: center; }
+.pv-box.land.cmp figure { width: 100%; max-width: 330px; }
+.pick.cards.stk-ori { grid-template-columns: 1fr 1fr; }
+.stk-ori button { flex-direction: row !important; justify-content: flex-start !important; text-align: left; padding: 16px !important; gap: 14px !important; min-height: 84px; }
+.stk-ori button > span { display: flex; flex-direction: column; gap: 2px; }
+.stk-ori b { font-size: 16px; color: var(--text-strong); } .stk-ori small { font-size: 13px; font-weight: 400; color: var(--text-sub); }
+.ori { flex: none; display: block; border-radius: 4px; box-shadow: 0 0 0 1.5px var(--grey-400) inset; background: var(--surface); }
+.ori.v { width: 30px; height: 44px; } .ori.h { width: 44px; height: 30px; }
+.stk-ori button[aria-pressed="true"] .ori { box-shadow: 0 0 0 1.5px var(--primary) inset; background: var(--primary-weak); }
+@media (max-width: 760px) { .pick.cards.stk-ori { grid-template-columns: 1fr; } }
+.stk.land.guide .stk-badge { margin-top: calc(64 * var(--u)); }
