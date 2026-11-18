@@ -1,0 +1,4 @@
+# 워크칩 리디자인 시안(정적 HTML)만 배포합니다. 기존 GitBook 문서 파일은 배포 대상이 아닙니다.
+[build]
+  publish = "workchip-redesign"
+  command = "echo 'static prototype - no build step'"
