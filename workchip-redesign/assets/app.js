@@ -300,44 +300,97 @@
         <div class="lc-row"><span>부여 <b class="tnum">${grant}일</b></span><span>사용 <b class="tnum">${used}일</b></span><span>승인 대기 <b class="tnum">${pDays}일</b></span><span>잔여 <b class="tnum blue">${left}일</b></span></div>
         <button class="btn-main" data-a="leaveNew">${ic('glyph/plus')}휴가 신청</button></section>
       <h2 class="fg-sec">신청 내역</h2>
-      ${S.leaves.length ? `<section class="fbox list">${S.leaves.map((l) => `<div class="row">${ic('color/' + (l.st === '대기' ? 'ap-pending' : 'ap-approved'), 'lead')}<span class="txt"><b>${l.t} · ${l.d}일</b><small>${l.a}${l.b !== l.a ? ` – ${l.b}` : ''}${l.st === '대기' ? ' · 그룹 리더 승인 대기' : ''}</small></span>${l.st === '대기' ? `<button class="btn btn-grey btn-sm" data-a="leaveCancel" data-i="${S.leaves.indexOf(l)}">취소</button>` : '<span class="badge badge-green">승인</span>'}</div>`).join('')}</section>`
+      ${S.leaves.length ? `<section class="fbox list">${S.leaves.map((l) => `<div class="row">${ic('color/' + (l.st === '대기' ? 'ap-pending' : 'ap-approved'), 'lead')}<span class="txt"><b>${l.t} · ${l.d}일</b><small>${l.a}${l.b !== l.a ? ` – ${l.b}` : ''}${l.files ? ` · 첨부 ${l.files}개` : ''}${l.st === '대기' ? ' · 그룹 리더 승인 대기' : ''}</small></span>${l.st === '대기' ? `<button class="btn btn-grey btn-sm" data-a="leaveCancel" data-i="${S.leaves.indexOf(l)}">취소</button>` : '<span class="badge badge-green">승인</span>'}</div>`).join('')}</section>`
         : `<div class="lv-empty">${ic('color/nav-leave')}<b>${S.year || 2026}년 신청한 휴가가 없어요</b><span>쉬고 싶은 날이 생기면 언제든 신청해 보세요</span></div>`}
     </div>${tabbar('leave')}</div>`;
   }
+  /* 휴가 신청 — 2단계 (1/2 유형 · 날짜 → 2/2 사유 · 첨부 · 확인). 실제 앱 화면 구성을 따르고 스타일은 워크칩 토큰 */
+  const LTYPES = [
+    { k: 'annual', n: '연차', d: '연차에서 빠져요', c: '#2F6FD6' },
+    { k: 'half', n: '반차', d: '연차에서 빠져요 · 반차만', c: '#137A8E', half: true },
+    { k: 'army', n: '예비군', d: '하루 · 증빙 필요', c: '#16A06B', proof: true },
+    { k: 'armyh', n: '예비군 반차', d: '반차만 · 증빙 필요', c: '#16A06B', half: true, proof: true },
+    { k: 'family', n: '경조 휴가', d: '연차에서 빠져요', c: '#F2B01E' },
+    { k: 'sick', n: '병가', d: '하루 · 증빙 필요', c: '#E0484E', proof: true },
+    { k: 'sickh', n: '병가 반차', d: '반차만 · 증빙 필요', c: '#E0484E', half: true, proof: true },
+  ];
   function leaveNew() {
-    let a = null, b = null;
-    const sh = openSheet({
-      title: '휴가 신청',
-      body: `<div class="field"><span class="field-label">유형</span><div class="pick" id="lt">${['연차', '오전 반차', '오후 반차', '경조사', '병가'].map((t, i) => `<button type="button" aria-pressed="${!i}">${t}</button>`).join('')}</div></div>
-        <div class="field"><span class="field-label" id="rangeL">날짜를 골라 주세요</span><div class="mini-cal" id="mc"></div></div>
-        ${ui.field('사유 <span class="opt">선택</span>', '<textarea class="input" id="lr" placeholder="예: 가족 행사"></textarea>')}
-        <div class="box"><div class="summary" id="ls"></div></div>`,
-      footer: '<button class="btn btn-primary btn-lg" id="ok" disabled>신청하기</button>',
-    });
-    const half = () => pickVals(sh.$('#lt'))[0].includes('반차');
-    const draw = () => {
-      const lead = (new Date(2026, 10, 1).getDay() + 6) % 7, days = [];
-      for (let i = 0; i < lead; i++) days.push('<span></span>');
-      for (let d = 1; d <= 30; d++) {
-        const dow = (lead + d - 1) % 7;
-        const inR = a && (b ? d >= a && d <= b : d === a);
-        days.push(`<button type="button" data-d="${d}" ${dow >= 5 ? 'class="we"' : ''} ${inR ? `aria-pressed="true" class="${d === a ? 'st' : ''} ${d === (b || a) ? 'en' : ''}"` : ''}>${d}</button>`);
+    const Y = 2026, T = new Date(Y, 10, 18);
+    const st = { step: 1, type: 'annual', a: null, b: null, part: 'am', mon: 10, reason: '', files: [] };
+    const ty = () => LTYPES.find((x) => x.k === st.type);
+    const left = 15;
+    const sh = openSheet({ title: null, body: '', footer: '<div id="lf" class="lv-foot"></div>' });
+    sh.el.classList.add('lv-sheet');
+    const days = () => { if (!st.a) return 0; if (ty().half) return 0.5; let n = 0; for (let d = new Date(st.a); d <= (st.b || st.a); d.setDate(d.getDate() + 1)) if (d.getDay() % 6) n++; return n; };
+    const kd = (d) => `${d.getMonth() + 1}월 ${d.getDate()}일 (${'일월화수목금토'[d.getDay()]})`;
+    const range = () => !st.a ? '날짜를 골라 주세요' : st.b && +st.b !== +st.a ? `${kd(st.a)} – ${kd(st.b)}` : `${kd(st.a)}${ty().half ? ` · ${st.part === 'am' ? '오전' : '오후'}` : ''}`;
+    const head = () => `<div class="lv-head">${ic('color/nav-leave', 'lv-ic')}<div><em class="lv-step tnum">${st.step} / 2</em><h2>${st.step === 1 ? '어떤 휴가인가요?' : '거의 다 됐어요'}</h2></div><button class="icon-btn lv-x" data-lx aria-label="닫기">${ic('glyph/close')}</button></div>`;
+    const cal = () => {
+      const first = new Date(Y, st.mon, 1), lead = (first.getDay() + 6) % 7, last = new Date(Y, st.mon + 1, 0).getDate();
+      const prevLast = new Date(Y, st.mon, 0).getDate(), cells = [];
+      for (let i = lead; i > 0; i--) cells.push(`<span class="dim">${prevLast - i + 1}</span>`);
+      for (let d = 1; d <= last; d++) {
+        const dt = new Date(Y, st.mon, d), dow = (lead + d - 1) % 7, past = dt < T;
+        const s = st.a && +dt === +st.a, e = st.b && +dt === +st.b, inR = st.a && st.b && dt > st.a && dt < st.b;
+        cells.push(`<button type="button" data-cd="${d}" class="${dow === 5 ? 'sat' : dow === 6 ? 'sun' : ''} ${+dt === +T ? 'today' : ''} ${s || e ? 'on' : ''} ${inR ? 'in' : ''} ${s && st.b ? 'st' : ''} ${e ? 'en' : ''}" ${past ? 'disabled' : ''}>${d}</button>`);
       }
-      sh.$('#mc').innerHTML = `<div class="mc-h">2026년 11월</div><div class="mc-g">${['월', '화', '수', '목', '금', '토', '일'].map((x) => `<em>${x}</em>`).join('')}${days.join('')}</div>`;
-      $$('#mc [data-d]', sh.el).forEach((x) => (x.onclick = () => { const d = +x.dataset.d; if (!a || b || d < a || half()) { a = d; b = half() ? d : null; } else b = d; draw(); }));
-      let n = 0; if (a) for (let d = a; d <= (b || a); d++) if ((lead + d - 1) % 7 < 5) n++;
-      if (half() && a) n = 0.5;
-      sh.$('#rangeL').textContent = a ? `11월 ${a}일${b && b !== a ? ` – 11월 ${b}일` : ''}` : '날짜를 골라 주세요';
-      sh.$('#ls').innerHTML = `<div><span>쓰는 연차</span><b class="tnum">${n}일</b></div><div><span>신청 뒤 남는 연차</span><b class="tnum">${15 - n}일</b></div><div><span>승인</span><b>그룹 리더 → 관리자</b></div>`;
-      sh.$('#ok').disabled = !n;
-      sh.n = n;
+      return `<div class="lv-cal"><div class="lv-cal-h"><button type="button" data-cm="-1" aria-label="이전 달" ${st.mon <= 10 ? 'disabled' : ''}>${ic('glyph/chevron-left')}</button><b>${Y}년 ${st.mon + 1}월</b><button type="button" data-cm="1" aria-label="다음 달">${ic('glyph/chevron-right')}</button></div>
+        <div class="lv-cal-g">${['월', '화', '수', '목', '금', '토', '일'].map((x, i) => `<em class="${i === 5 ? 'sat' : i === 6 ? 'sun' : ''}">${x}</em>`).join('')}${cells.join('')}</div></div>`;
     };
-    sh.$('#lt').addEventListener('change', () => { if (half()) b = a; draw(); });
+    const fileRow = (f, i) => `<div class="lv-file">${f.img ? `<img src="${f.img}" alt="">` : `<span class="lv-fi">${ic('mono/document')}</span>`}<span class="lv-ft"><b>${f.name}</b><small class="tnum">${f.size}</small></span><button type="button" class="icon-btn" data-fdel="${i}" aria-label="${f.name} 삭제">${ic('glyph/close')}</button></div>`;
+    const draw = () => {
+      const t = ty(), n = days();
+      if (st.step === 1) {
+        sh.setBody(`${head()}
+          <div class="lv-types">${LTYPES.map((x) => `<button type="button" data-lt="${x.k}" aria-pressed="${st.type === x.k}"><b><i style="background:${x.c}"></i>${x.n}</b><small>${x.d}</small></button>`).join('')}</div>
+          ${t.half ? `<div class="field"><span class="field-label">언제 쉬나요?</span>${ui.seg([['am', '오전 반차'], ['pm', '오후 반차']], st.part === 'pm' ? 1 : 0, 'block').replace('class="segment ', 'id="lpart" class="segment ')}</div>` : '<p class="lv-q">언제 쉬나요?</p>'}
+          ${t.half ? '<p class="lv-q">날짜</p>' : ''}${cal()}`);
+        sh.$('#lf').innerHTML = `<div class="lv-sum"><span>${range()}</span><span>${n ? `<b class="tnum">${n}일</b> · 남는 연차 ${left - n}일` : ''}</span></div><button class="btn btn-primary btn-lg btn-block" id="lnext" ${n ? '' : 'disabled'}>다음</button>`;
+      } else {
+        const need = t.proof;
+        sh.setBody(`${head()}
+          <div class="lv-pick"><span class="lv-dot" style="background:${t.c}"></span><span><b>${t.n}</b><small>${range()} · ${n}일</small></span><button type="button" class="link" data-lback>바꾸기</button></div>
+          ${ui.field('사유 <span class="opt">선택</span>', `<textarea class="input" id="lr" maxlength="100" placeholder="예: 가족 행사">${st.reason}</textarea>`)}
+          <div class="field"><span class="field-label">첨부 파일 <span class="opt">선택${need ? ' · 증빙이 있으면 승인이 빨라요' : ''}</span></span>
+            ${st.files.map(fileRow).join('')}
+            ${st.files.length < 3 ? `<label class="lv-up">${ic('mono/upload')}<span><b>${st.files.length ? '파일 더 올리기' : '파일 올리기'}</b><small>사진 · PDF · 10MB 이하 · 최대 3개</small></span><input type="file" id="lfile" accept="image/*,application/pdf" multiple hidden></label>` : '<p class="field-hint">파일은 3개까지 올릴 수 있어요</p>'}
+            ${need && !st.files.length ? `<p class="lv-tip">${ic('mono/info')}${t.n}는 진단서 · 소집 통지서 같은 증빙을 함께 올리면 좋아요. 나중에 올려도 돼요.</p>` : ''}</div>
+          <div class="box"><div class="summary"><div><span>쓰는 연차</span><b class="tnum">${n}일</b></div><div><span>신청 뒤 남는 연차</span><b class="tnum">${left - n}일</b></div><div><span>첨부</span><b class="tnum">${st.files.length ? `${st.files.length}개` : '없음'}</b></div><div><span>승인</span><b>그룹 리더 → 관리자</b></div></div></div>`);
+        sh.$('#lf').innerHTML = `<div class="row2 lv-btns"><button class="btn btn-grey btn-lg" id="lprev">이전</button><button class="btn btn-primary btn-lg" id="lgo">신청하기</button></div>`;
+      }
+      bind();
+    };
+    const bind = () => {
+      sh.$('[data-lx]').onclick = sh.close;
+      $$('[data-lt]', sh.el).forEach((x) => (x.onclick = () => { st.type = x.dataset.lt; if (ty().half && st.b) st.b = null; draw(); }));
+      sh.$('#lpart')?.addEventListener('change', (e) => { st.part = e.detail; draw(); });
+      bindControls(sh.el);
+      $$('[data-cm]', sh.el).forEach((x) => (x.onclick = () => { st.mon = Math.max(10, Math.min(13, st.mon + +x.dataset.cm)); draw(); }));
+      $$('[data-cd]', sh.el).forEach((x) => (x.onclick = () => {
+        const d = new Date(Y, st.mon, +x.dataset.cd);
+        if (ty().half || !st.a || st.b || d < st.a) { st.a = d; st.b = null; } else if (+d === +st.a) st.a = null; else st.b = d;
+        draw();
+      }));
+      sh.$('#lnext')?.addEventListener('click', () => { st.step = 2; draw(); });
+      sh.$('[data-lback]')?.addEventListener('click', () => { st.step = 1; draw(); });
+      sh.$('#lprev')?.addEventListener('click', () => { st.reason = sh.$('#lr').value; st.step = 1; draw(); });
+      sh.$('#lr')?.addEventListener('input', (e) => (st.reason = e.target.value));
+      $$('[data-fdel]', sh.el).forEach((x) => (x.onclick = () => { st.files.splice(+x.dataset.fdel, 1); draw(); }));
+      sh.$('#lfile')?.addEventListener('change', (e) => {
+        const fs = [...e.target.files].slice(0, 3 - st.files.length);
+        const big = fs.find((f) => f.size > 10 * 1024 * 1024); if (big) return toast('10MB 이하 파일만 올릴 수 있어요');
+        Promise.all(fs.map((f) => new Promise((res) => { const sz = f.size > 1048576 ? `${(f.size / 1048576).toFixed(1)}MB` : `${Math.max(1, Math.round(f.size / 1024))}KB`; if (!f.type.startsWith('image/')) return res({ name: f.name, size: sz }); const r = new FileReader(); r.onload = () => res({ name: f.name, size: sz, img: r.result }); r.readAsDataURL(f); })))
+          .then((list) => { st.files.push(...list); draw(); toast(`파일 ${list.length}개를 올렸어요`); });
+      });
+      sh.$('#lgo')?.addEventListener('click', () => {
+        const f = (d) => `${d.getMonth() + 1}.${pad(d.getDate())} (${'일월화수목금토'[d.getDay()]})`;
+        S.leaves.push({ t: ty().half ? `${ty().n} · ${st.part === 'am' ? '오전' : '오후'}` : ty().n, a: f(st.a), b: f(st.b || st.a), d: days(), st: '대기', files: st.files.length });
+        sh.setBody(`<div class="done lv-done">${charImg('leave', 'float sm')}<h3>휴가를 신청했어요</h3><p>${ty().n} · ${range()}<br>그룹 리더가 승인하면 알려 드릴게요${st.files.length ? ` · 첨부 ${st.files.length}개` : ''}</p></div>`);
+        sh.$('#lf').innerHTML = '<button class="btn btn-primary btn-lg btn-block" id="ldone">확인</button>';
+        sh.$('#ldone').onclick = () => { sh.close(); route(); };
+      });
+    };
     draw();
-    sh.$('#ok').onclick = () => {
-      S.leaves.push({ t: pickVals(sh.$('#lt'))[0], a: `11.${pad(a)}`, b: `11.${pad(b || a)}`, d: sh.n, st: '대기' });
-      sh.close(); toast('휴가를 신청했어요. 승인되면 알려 드릴게요'); route();
-    };
   }
 
   /* ───────────── 전체 ───────────── */

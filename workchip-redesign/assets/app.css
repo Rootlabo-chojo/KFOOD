@@ -876,3 +876,67 @@ body[data-dev="inapp"] .phone { padding-top: 92px; }
 .sheet-qr .pr span { font-size:12px; font-weight:700; padding:5px 10px; border-radius:999px; background:var(--grey-100); color:var(--text); }
 @media (min-width: 900px) { body[data-dev="pc"].app-layers .layer-sheet .layer-box { left: calc(50% - 170px); } }
 .copy-in { display: flex; gap: 8px; align-items: center; } .copy-in .input { flex: 1; min-width: 0; } .copy-in .btn { height: 48px; flex: none; }
+
+/* ───── 휴가 신청 (2단계 · 첨부) ───── */
+.lv-sheet .layer-box { max-height: 94%; }
+.lv-sheet .layer-b { gap: 16px; padding-top: 8px; }
+.lv-head { display: flex; align-items: center; gap: 12px; }
+.lv-ic { font-size: 52px; flex: none; }
+.lv-head > div { flex: 1; }
+.lv-step { font-style: normal; font-size: 14px; font-weight: 700; color: var(--primary); }
+.lv-head h2 { margin: 2px 0 0; font-size: 22px; font-weight: 800; color: var(--text-strong); }
+.lv-x { font-size: 22px; }
+.lv-types { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.lv-types button { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 14px 14px; border-radius: 16px; text-align: left; background: var(--surface); box-shadow: 0 0 0 1.5px var(--line) inset; }
+.lv-types button[aria-pressed="true"] { background: var(--primary-weak); box-shadow: 0 0 0 2px var(--primary) inset; }
+.lv-types b { display: flex; align-items: center; gap: 8px; font-size: 16px; color: var(--text-strong); }
+.lv-types b i { width: 10px; height: 10px; border-radius: 3px; flex: none; }
+.lv-types small { font-size: 13px; color: var(--text-sub); padding-left: 18px; }
+.lv-q { margin: 4px 0 -8px; font-size: 16px; font-weight: 700; color: var(--text-strong); }
+.lv-cal-h { display: flex; align-items: center; justify-content: space-between; padding: 0 4px; }
+.lv-cal-h b { font-size: 17px; color: var(--text-strong); }
+.lv-cal-h button { width: 36px; height: 36px; display: grid; place-items: center; font-size: 18px; color: var(--text-sub); }
+.lv-cal-h button:disabled { color: var(--grey-300); }
+.lv-cal-g { display: grid; grid-template-columns: repeat(7, 1fr); row-gap: 4px; margin-top: 8px; text-align: center; }
+.lv-cal-g em { font-style: normal; font-size: 13px; color: var(--text-sub); padding: 6px 0; }
+.lv-cal-g em.sat, .lv-cal-g button.sat { color: #1F5FD1; } .lv-cal-g em.sun, .lv-cal-g button.sun { color: #D23B3B; }
+.lv-cal-g span.dim { height: 46px; display: grid; place-items: center; font-size: 17px; color: var(--grey-300); }
+.lv-cal-g button { position: relative; height: 46px; font-size: 17px; font-weight: 600; color: var(--text-strong); font-variant-numeric: tabular-nums; }
+.lv-cal-g button:disabled { color: var(--grey-300); font-weight: 500; }
+.lv-cal-g button.today::before { content: ""; position: absolute; inset: 1px calc(50% - 22px); border-radius: 50%; box-shadow: 0 0 0 1.5px #A8C8F5 inset; }
+.lv-cal-g button.in { background: var(--primary-weak); color: var(--primary); }
+.lv-cal-g button.on { color: #fff; z-index: 0; }
+.lv-cal-g button.on::after { content: ""; position: absolute; z-index: -1; inset: 1px calc(50% - 22px); border-radius: 50%; background: var(--primary); }
+.lv-cal-g button.st { background: linear-gradient(90deg, transparent 50%, var(--primary-weak) 50%); }
+.lv-cal-g button.en { background: linear-gradient(90deg, var(--primary-weak) 50%, transparent 50%); }
+.lv-cal-g button.st.en { background: none; }
+.lv-foot { width: 100%; display: flex; flex-direction: column; gap: 12px; }
+.lv-sum { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; padding-top: 12px; border-top: 1px solid var(--line-weak); font-size: 15px; color: var(--text-sub); }
+.lv-sum b { font-size: 22px; font-weight: 800; color: var(--text-strong); }
+.lv-sheet .btn-primary:disabled { background: #A9C9F7; opacity: 1; color: #fff; }
+.lv-btns { width: 100%; grid-template-columns: 1fr 2fr; }
+.lv-pick { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 16px; background: var(--grey-50); box-shadow: 0 0 0 1px var(--line-weak) inset; }
+.lv-dot { width: 12px; height: 12px; border-radius: 4px; flex: none; }
+.lv-pick > span:nth-child(2) { flex: 1; min-width: 0; }
+.lv-pick b { display: block; font-size: 16px; color: var(--text-strong); }
+.lv-pick small { font-size: 13px; color: var(--text-sub); }
+.lv-pick .link { font-size: 14px; font-weight: 600; color: var(--primary); }
+.lv-up { display: flex; align-items: center; gap: 12px; padding: 16px; border-radius: 16px; border: 1.5px dashed var(--grey-300); background: var(--grey-50); cursor: pointer; }
+.lv-up:hover { border-color: var(--primary); }
+.lv-up > .ic { font-size: 22px; color: var(--primary); flex: none; }
+.lv-up b { display: block; font-size: 15px; color: var(--text-strong); }
+.lv-up small { font-size: 12px; color: var(--text-sub); }
+.lv-file { display: flex; align-items: center; gap: 12px; padding: 10px 6px 10px 10px; border-radius: 14px; background: var(--surface); box-shadow: 0 0 0 1px var(--line) inset; }
+.lv-file img, .lv-fi { width: 44px; height: 44px; border-radius: 10px; object-fit: cover; flex: none; }
+.lv-fi { display: grid; place-items: center; background: var(--primary-weak); color: var(--primary); font-size: 22px; }
+.lv-ft { flex: 1; min-width: 0; }
+.lv-ft b { display: block; font-size: 14px; color: var(--text-strong); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lv-ft small { font-size: 12px; color: var(--text-weak); }
+.lv-file .icon-btn { font-size: 16px; color: var(--grey-500); flex: none; }
+.lv-tip { margin: 0; display: flex; gap: 6px; font-size: 13px; color: var(--text-sub); line-height: 1.5; }
+.lv-tip .ic { flex: none; margin-top: 2px; color: var(--primary); }
+.lv-done { padding: 40px 0 8px; }
+@media (max-width: 360px) { .lv-types small { padding-left: 0; } }
+.lv-foot .btn { flex: none; height: 56px; }
+.lv-btns .btn { flex: none; }
+.field-label .opt { margin-left: 4px; font-weight: 400; color: var(--text-weak); font-size: 13px; }
